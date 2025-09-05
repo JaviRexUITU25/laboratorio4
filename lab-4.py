@@ -10,6 +10,8 @@ class Concurso:
                 print("Nombre de la banda ya registrado")
                 return
             institucion= input("Ingrese el nombre de la institucion: ")
+            categoria= input("Ingrese la categoria: ")
+
 
         print("Se abrió la ventana: Inscribir Banda")
         ventana_inscribir = tk.Toplevel(ventana)
