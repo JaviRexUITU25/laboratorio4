@@ -1,8 +1,18 @@
 import tkinter as tk
+from tkinter import messagebox
 class Concurso:
     def __init__(self):
-        self.bandas = {}
+        self.bandas= {}
     def inscribir_banda(self):
+        try:
+            nombre=input("Ingrese el nombre de la banda: ")
+            if nombre in self.bandas:
+                print("Nombre de la banda ya registrado")
+                return
+            institucion= input("Ingrese el nombre de la institucion: ")
+            categoria= input("Ingrese la categoria: ")
+
+
         print("Se abrió la ventana: Inscribir Banda")
         ventana_inscribir = tk.Toplevel(ventana)
         ventana_inscribir.title("Inscribir Banda")
@@ -20,15 +30,16 @@ class Concurso:
         ventana_listado.title("Listado de Bandas")
         ventana_listado.geometry("400x300")
 
-    def ver_ranking(self):
-        print("Se abrió la ventana: Ranking Final")
-        ventana_ranking = tk.Toplevel(ventana)
-        ventana_ranking.title("Ranking Final")
-        ventana_ranking.geometry("400x300")
 
-    def salir(self):
-        print("Aplicación cerrada")
-        ventana.quit()
+def ver_ranking(self):
+    print("Se abrió la ventana: Ranking Final")
+    ventana_ranking = tk.Toplevel(ventana)
+    ventana_ranking.title("Ranking Final")
+    ventana_ranking.geometry("400x300")
+
+def salir():
+    print("Aplicación cerrada")
+    ventana.quit()
 
 ventana = tk.Tk()
 ventana.title("Concurso de Bandas - Quetzaltenango")
