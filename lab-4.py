@@ -1,19 +1,31 @@
 import tkinter as tk
-from tkinter import messagebox
 
 def inscribir_banda():
-    messagebox.showinfo("Inscripción", "Aquí se inscribiría una banda")
+    print("Se abrió la ventana: Inscribir Banda")
+    ventana_inscribir = tk.Toplevel(ventana)
+    ventana_inscribir.title("Inscribir Banda")
+    ventana_inscribir.geometry("400x300")
 
 def registrar_evaluacion():
-    messagebox.showinfo("Evaluación", "Aquí se registrarían los puntajes")
+    print("Se abrió la ventana: Registrar Evaluación")
+    ventana_eval = tk.Toplevel(ventana)
+    ventana_eval.title("Registrar Evaluación")
+    ventana_eval.geometry("400x300")
 
 def listar_bandas():
-    messagebox.showinfo("Listado", "Aquí se mostraría el listado de bandas")
+    print("Se abrió la ventana: Listado de Bandas")
+    ventana_listado = tk.Toplevel(ventana)
+    ventana_listado.title("Listado de Bandas")
+    ventana_listado.geometry("400x300")
 
 def ver_ranking():
-    messagebox.showinfo("Ranking", "Aquí se mostraría el ranking final")
+    print("Se abrió la ventana: Ranking Final")
+    ventana_ranking = tk.Toplevel(ventana)
+    ventana_ranking.title("Ranking Final")
+    ventana_ranking.geometry("400x300")
 
 def salir():
+    print("Aplicación cerrada")
     ventana.quit()
 
 ventana = tk.Tk()
@@ -44,5 +56,24 @@ etiqueta.pack(pady=50)
 
 ventana.mainloop()
 
-class Banda:
-    def __init__(self):
+
+class Participante:
+    def __init__(self,nombre,institucion):
+        self.nombre =nombre
+        self.institucion = institucion
+    def show_info(self):
+        return f"Nombre: {self.nombre}-- institucion: {self.institucion}"
+
+class BandaEscolar(Participante):
+    def __init__(self, nombre, institucion,categoria, puntajes):
+        self._categoria = categoria
+        self._puntajes = puntajes
+        super().__init__(nombre, institucion)
+    def set_categoria(self,categoria):
+        self._categoria = categoria
+    def get_categoria(self):
+        return self._categoria
+    def get_puntajes(self):
+        return self._puntajes
+    def set_puntajes(self, puntajes):
+        self._puntajes = puntajes
