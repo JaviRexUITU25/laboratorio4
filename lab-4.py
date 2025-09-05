@@ -1,32 +1,34 @@
 import tkinter as tk
+class Concurso:
+    def __init__(self):
+        self.bandas = {}
+    def inscribir_banda(self):
+        print("Se abrió la ventana: Inscribir Banda")
+        ventana_inscribir = tk.Toplevel(ventana)
+        ventana_inscribir.title("Inscribir Banda")
+        ventana_inscribir.geometry("400x300")
 
-def inscribir_banda():
-    print("Se abrió la ventana: Inscribir Banda")
-    ventana_inscribir = tk.Toplevel(ventana)
-    ventana_inscribir.title("Inscribir Banda")
-    ventana_inscribir.geometry("400x300")
+    def registrar_evaluacion(self):
+        print("Se abrió la ventana: Registrar Evaluación")
+        ventana_eval = tk.Toplevel(ventana)
+        ventana_eval.title("Registrar Evaluación")
+        ventana_eval.geometry("400x300")
 
-def registrar_evaluacion():
-    print("Se abrió la ventana: Registrar Evaluación")
-    ventana_eval = tk.Toplevel(ventana)
-    ventana_eval.title("Registrar Evaluación")
-    ventana_eval.geometry("400x300")
+    def listar_bandas(self):
+        print("Se abrió la ventana: Listado de Bandas")
+        ventana_listado = tk.Toplevel(ventana)
+        ventana_listado.title("Listado de Bandas")
+        ventana_listado.geometry("400x300")
 
-def listar_bandas():
-    print("Se abrió la ventana: Listado de Bandas")
-    ventana_listado = tk.Toplevel(ventana)
-    ventana_listado.title("Listado de Bandas")
-    ventana_listado.geometry("400x300")
+    def ver_ranking(self):
+        print("Se abrió la ventana: Ranking Final")
+        ventana_ranking = tk.Toplevel(ventana)
+        ventana_ranking.title("Ranking Final")
+        ventana_ranking.geometry("400x300")
 
-def ver_ranking():
-    print("Se abrió la ventana: Ranking Final")
-    ventana_ranking = tk.Toplevel(ventana)
-    ventana_ranking.title("Ranking Final")
-    ventana_ranking.geometry("400x300")
-
-def salir():
-    print("Aplicación cerrada")
-    ventana.quit()
+    def salir(self):
+        print("Aplicación cerrada")
+        ventana.quit()
 
 ventana = tk.Tk()
 ventana.title("Concurso de Bandas - Quetzaltenango")
