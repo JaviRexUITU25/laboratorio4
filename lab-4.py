@@ -12,6 +12,9 @@ class Concurso:
             institucion= input("Ingrese el nombre de la institucion: ")
             categoria= input("Ingrese la categoria: ")
             self.bandas.append(nombre,institucion,categoria)
+        except Exception as e:
+            print("Un error ha ocurrido!\n"
+                  f"ERROR: {e}")
 
         print("Se abrió la ventana: Inscribir Banda")
         ventana_inscribir = tk.Toplevel(ventana)
@@ -31,11 +34,11 @@ class Concurso:
         ventana_listado.geometry("400x300")
 
 
-def ver_ranking(self):
-    print("Se abrió la ventana: Ranking Final")
-    ventana_ranking = tk.Toplevel(ventana)
-    ventana_ranking.title("Ranking Final")
-    ventana_ranking.geometry("400x300")
+    def ver_ranking(self):
+        print("Se abrió la ventana: Ranking Final")
+        ventana_ranking = tk.Toplevel(ventana)
+        ventana_ranking.title("Ranking Final")
+        ventana_ranking.geometry("400x300")
 
 def salir():
     print("Aplicación cerrada")
@@ -48,10 +51,10 @@ ventana.geometry("500x300")
 barra_menu = tk.Menu(ventana)
 
 menu_opciones = tk.Menu(barra_menu, tearoff=0)
-menu_opciones.add_command(label="Inscribir Banda", command=inscribir_banda)
-menu_opciones.add_command(label="Registrar Evaluación", command=registrar_evaluacion)
-menu_opciones.add_command(label="Listar Bandas", command=listar_bandas)
-menu_opciones.add_command(label="Ver Ranking", command=ver_ranking)
+menu_opciones.add_command(label="Inscribir Banda", command=Concurso.inscribir_banda)
+menu_opciones.add_command(label="Registrar Evaluación", command=Concurso.registrar_evaluacion)
+menu_opciones.add_command(label="Listar Bandas", command=Concurso.listar_bandas)
+menu_opciones.add_command(label="Ver Ranking", command=Concurso.ver_ranking)
 menu_opciones.add_separator()
 menu_opciones.add_command(label="Salir", command=salir)
 
