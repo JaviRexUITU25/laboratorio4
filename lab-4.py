@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 class Concurso:
     def __init__(self):
-        self.bandas= {}
+        self.bandas= []
     def inscribir_banda(self):
         try:
             nombre=input("Ingrese el nombre de la banda: ")
@@ -11,7 +11,7 @@ class Concurso:
                 return
             institucion= input("Ingrese el nombre de la institucion: ")
             categoria= input("Ingrese la categoria: ")
-
+            self.bandas.append(nombre,institucion,categoria)
 
         print("Se abrió la ventana: Inscribir Banda")
         ventana_inscribir = tk.Toplevel(ventana)
