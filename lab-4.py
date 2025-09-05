@@ -1,22 +1,38 @@
 import tkinter as tk
-from tkinter import messagebox
+ventana = tk.Tk()
+ventana.title("Concurso de Bandas - Quetzaltenango")
+ventana.geometry("500x300")
 class Concurso:
     def __init__(self):
         self.bandas= {}
     def inscribir_banda(self):
-        try:
-            nombre=input("Ingrese el nombre de la banda: ")
-            if nombre in self.bandas:
-                print("Nombre de la banda ya registrado")
-                return
-            institucion= input("Ingrese el nombre de la institucion: ")
-            categoria= input("Ingrese la categoria: ")
-
-
-        print("Se abrió la ventana: Inscribir Banda")
         ventana_inscribir = tk.Toplevel(ventana)
         ventana_inscribir.title("Inscribir Banda")
         ventana_inscribir.geometry("400x300")
+        try:
+            nombre=tk.Label(ventana_inscribir,text="Nombre: ")
+            nombre.pack(pady=3)
+            entrada_nombre=tk.Entry(ventana_inscribir)
+            entrada_nombre.pack(pady=3)
+            if nombre in self.bandas:
+                print("Nombre de la banda ya registrado")
+                return
+            institucion = tk.Label(ventana_inscribir, text="Institucion: ")
+            institucion.pack(pady=3)
+            entrada_institucion = tk.Entry(ventana_inscribir)
+            entrada_institucion.pack(pady=3)
+            categoria = tk.Label(ventana_inscribir, text="Categoria: ")
+            categoria.pack(pady=3)
+            entrada_categoria = tk.Entry(ventana_inscribir)
+            entrada_categoria.pack(pady=3)
+            self.bandas[nombre]= {
+                "nombre":nombre,
+                "institucion":institucion,
+                "categoria":categoria
+            }
+        except Exception as e:
+            print(f"Error: {e}")
+        print("Se abrió la ventana: Inscribir Banda")
 
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
@@ -31,40 +47,57 @@ class Concurso:
         ventana_listado.geometry("400x300")
 
 
-def ver_ranking(self):
-    print("Se abrió la ventana: Ranking Final")
-    ventana_ranking = tk.Toplevel(ventana)
-    ventana_ranking.title("Ranking Final")
-    ventana_ranking.geometry("400x300")
+    def ver_ranking(self):
+        print("Se abrió la ventana: Ranking Final")
+        ventana_ranking = tk.Toplevel(ventana)
+        ventana_ranking.title("Ranking Final")
+        ventana_ranking.geometry("400x300")
 
-def salir():
-    print("Aplicación cerrada")
-    ventana.quit()
+class ConcursoBandasApp:
+    def __init__(self):
+        self.ventana = tk.Tk()
+        self.ventana.title("Concurso de Bandas - Quetzaltenango")
+        self.ventana.geometry("500x300")
 
-ventana = tk.Tk()
-ventana.title("Concurso de Bandas - Quetzaltenango")
-ventana.geometry("500x300")
+        self.menu()
 
-barra_menu = tk.Menu(ventana)
+        tk.Label(
+            self.ventana,
+            text="Sistema de Inscripción y Evaluación de Bandas Escolares\nConcurso 14 de Septiembre - Quetzaltenango",
+            font=("Arial", 12, "bold"),
+            justify="center"
+        ).pack(pady=50)
 
-menu_opciones = tk.Menu(barra_menu, tearoff=0)
-menu_opciones.add_command(label="Inscribir Banda", command=inscribir_banda)
-menu_opciones.add_command(label="Registrar Evaluación", command=registrar_evaluacion)
-menu_opciones.add_command(label="Listar Bandas", command=listar_bandas)
-menu_opciones.add_command(label="Ver Ranking", command=ver_ranking)
-menu_opciones.add_separator()
-menu_opciones.add_command(label="Salir", command=salir)
+        self.ventana.mainloop()
 
-barra_menu.add_cascade(label="Opciones", menu=menu_opciones)
+    def menu(self):
+        barra = tk.Menu(self.ventana)
+        opciones = tk.Menu(barra, tearoff=0)
+        opciones.add_command(label="Inscribir Banda", command=self.inscribir_banda)
+        opciones.add_command(label="Registrar Evaluación", command=self.registrar_evaluacion)
+        opciones.add_command(label="Listar Bandas", command=self.listar_bandas)
+        opciones.add_command(label="Ver Ranking", command=self.ver_ranking)
+        opciones.add_separator()
+        opciones.add_command(label="Salir", command=self.ventana.quit)
+        barra.add_cascade(label="Opciones", menu=opciones)
+        self.ventana.config(menu=barra)
 
-ventana.config(menu=barra_menu)
+    def inscribir_banda(self):
+        print("Se abrió la ventana: Inscribir Banda")
+        tk.Toplevel(self.ventana).title("Inscribir Banda")
 
-etiqueta = tk.Label(
-    ventana,
-    text="Sistema de Inscripción y Evaluación de Bandas Escolares\nDesfile 15 de Septiembre - Quetzaltenango",
-    font=("Arial", 12, "bold"),
-    justify="center"
-)
-etiqueta.pack(pady=50)
+    def registrar_evaluacion(self):
+        print("Se abrió la ventana: Registrar Evaluación")
+        tk.Toplevel(self.ventana).title("Registrar Evaluación")
 
-ventana.mainloop()
+    def listar_bandas(self):
+        print("Se abrió la ventana: Listado de Bandas")
+        tk.Toplevel(self.ventana).title("Listado de Bandas")
+
+    def ver_ranking(self):
+        print("Se abrió la ventana: Ranking Final")
+        tk.Toplevel(self.ventana).title("Ranking Final")
+
+
+if __name__ == "__main__":
+    ConcursoBandasApp()
