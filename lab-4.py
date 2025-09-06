@@ -17,7 +17,9 @@ class Concurso:
         self.bandas={}
 
         def inscribir_banda(self, banda):
-            pass
+            if banda.nombre in self.bandas:
+                print("Banda ya inscrita")
+            self.bandas[banda.nombre] = banda
 
         def registrar_evaluacion(self, nombre_banda, puntajes):
             pass
