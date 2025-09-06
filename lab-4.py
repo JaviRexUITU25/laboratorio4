@@ -1,95 +1,91 @@
 import tkinter as tk
-from tkinter import messagebox
+class Participante:
+    def __init__(self,nombre,institucion):
+        self.nombre=nombre
+        self.institucion=institucion
+    def mostrar_info(self):
+        return f"{self.nombre}|{self.institucion}"
+class Banda(Participante):
+    def __init__(self,nombre,institucion,categoria):
+        super().__init__(nombre,institucion)
+        self.categoria= categoria
+        self.puntajes={}
 class Concurso:
+    def __init__(self,nombre,fecha):
+        self.nombre=nombre
+        self.fecha=fecha
+        self.bandas={}
+
+        def inscribir_banda(self, banda):
+            if banda.nombre in self.bandas:
+                print("Banda ya inscrita")
+            self.bandas[banda.nombre] = banda
+
+        def registrar_evaluacion(self, nombre_banda, puntajes):
+            pass
+
+        def listar_bandas(self):
+            pass
+        def ranking(self):
+            pass
+class ConcursoBandasApp:
     def __init__(self):
-        self.bandas= []
+        self.ventana = tk.Tk()
+        self.ventana.title("Concurso de Bandas - Quetzaltenango")
+        self.ventana.geometry("500x300")
+
+        self.menu()
+
+        tk.Label(
+            self.ventana,
+            text="Sistema de Inscripción y Evaluación de Bandas Escolares\nConcurso 14 de Septiembre - Quetzaltenango",
+            font=("Arial", 12, "bold"),
+            justify="center"
+        ).pack(pady=50)
+
+        self.ventana.mainloop()
+
+    def menu(self):
+        barra = tk.Menu(self.ventana)
+        opciones = tk.Menu(barra, tearoff=0)
+        opciones.add_command(label="Inscribir Banda", command=self.inscribir_banda)
+        opciones.add_command(label="Registrar Evaluación", command=self.registrar_evaluacion)
+        opciones.add_command(label="Listar Bandas", command=self.listar_bandas)
+        opciones.add_command(label="Ver Ranking", command=self.ver_ranking)
+        opciones.add_separator()
+        opciones.add_command(label="Salir", command=self.ventana.quit)
+        barra.add_cascade(label="Opciones", menu=opciones)
+        self.ventana.config(menu=barra)
+
     def inscribir_banda(self):
-        try:
-            nombre=input("Ingrese el nombre de la banda: ")
-            if nombre in self.bandas:
-                print("Nombre de la banda ya registrado")
-                return
-            institucion= input("Ingrese el nombre de la institucion: ")
-            categoria= input("Ingrese la categoria: ")
-            self.bandas.append(nombre,institucion,categoria)
-        except Exception as e:
-            print("Un error ha ocurrido!\n"
-                  f"ERROR: {e}")
-
-        print("Se abrió la ventana: Inscribir Banda")
-        ventana_inscribir = tk.Toplevel(ventana)
+        ventana_inscribir = tk.Toplevel(self.ventana)
         ventana_inscribir.title("Inscribir Banda")
-        ventana_inscribir.geometry("400x300")
 
+        etiqueta_nombre = tk.Label(ventana_inscribir, text="Nombre de la Banda:")
+        etiqueta_nombre.pack(pady=3)
+        entrada_nombre = tk.Entry(ventana_inscribir)
+        entrada_nombre.pack(pady=3)
+
+        etiqueta_institucion = tk.Label(ventana_inscribir, text="Institucion:")
+        etiqueta_institucion.pack(pady=3)
+        entrada_institucion = tk.Entry(ventana_inscribir)
+        entrada_institucion.pack(pady=3)
+        etiqueta_categoria = tk.Label(ventana_inscribir, text="Categoria (Primaria/Basico/Diversificado):")
+        etiqueta_categoria.pack(pady=3)
+        entrada_categoria = tk.Entry(ventana_inscribir)
+        entrada_categoria.pack(pady=3)
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
-        ventana_eval = tk.Toplevel(ventana)
-        ventana_eval.title("Registrar Evaluación")
-        ventana_eval.geometry("400x300")
+        tk.Toplevel(self.ventana).title("Registrar Evaluación")
 
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
-        ventana_listado = tk.Toplevel(ventana)
-        ventana_listado.title("Listado de Bandas")
-        ventana_listado.geometry("400x300")
-
+        tk.Toplevel(self.ventana).title("Listado de Bandas")
 
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
-        ventana_ranking = tk.Toplevel(ventana)
-        ventana_ranking.title("Ranking Final")
-        ventana_ranking.geometry("400x300")
-
-def salir():
-    print("Aplicación cerrada")
-    ventana.quit()
-
-ventana = tk.Tk()
-ventana.title("Concurso de Bandas - Quetzaltenango")
-ventana.geometry("500x300")
-
-barra_menu = tk.Menu(ventana)
-
-menu_opciones = tk.Menu(barra_menu, tearoff=0)
-menu_opciones.add_command(label="Inscribir Banda", command=Concurso.inscribir_banda)
-menu_opciones.add_command(label="Registrar Evaluación", command=Concurso.registrar_evaluacion)
-menu_opciones.add_command(label="Listar Bandas", command=Concurso.listar_bandas)
-menu_opciones.add_command(label="Ver Ranking", command=Concurso.ver_ranking)
-menu_opciones.add_separator()
-menu_opciones.add_command(label="Salir", command=salir)
-
-barra_menu.add_cascade(label="Opciones", menu=menu_opciones)
-
-ventana.config(menu=barra_menu)
-
-etiqueta = tk.Label(
-    ventana,
-    text="Sistema de Inscripción y Evaluación de Bandas Escolares\nDesfile 15 de Septiembre - Quetzaltenango",
-    font=("Arial", 12, "bold"),
-    justify="center"
-)
-etiqueta.pack(pady=50)
-
-ventana.mainloop()
+        tk.Toplevel(self.ventana).title("Ranking Final")
 
 
-class Participante:
-    def __init__(self,nombre,institucion):
-        self.nombre =nombre
-        self.institucion = institucion
-    def show_info(self):
-        return f"Nombre: {self.nombre}-- institucion: {self.institucion}"
-
-class BandaEscolar(Participante):
-    def __init__(self, nombre, institucion,categoria, puntajes):
-        self._categoria = categoria
-        self._puntajes = puntajes
-        super().__init__(nombre, institucion)
-    def set_categoria(self,categoria):
-        self._categoria = categoria
-    def get_categoria(self):
-        return self._categoria
-    def get_puntajes(self):
-        return self._puntajes
-    def set_puntajes(self, puntajes):
-        self._puntajes = puntajes
+if __name__ == "__main__":
+    ConcursoBandasApp()
