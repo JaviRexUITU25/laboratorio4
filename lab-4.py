@@ -1,58 +1,31 @@
 import tkinter as tk
-ventana = tk.Tk()
-ventana.title("Concurso de Bandas - Quetzaltenango")
-ventana.geometry("500x300")
+class Participante:
+    def __init__(self,nombre,institucion):
+        self.nombre=nombre
+        self.institucion=institucion
+    def mostrar_info(self):
+        return f"{self.nombre}|{self.institucion}"
+class Banda(Participante):
+    def __init__(self,nombre,institucion,categoria):
+        super().__init__(nombre,institucion)
+        self.categoria= categoria
+        self.puntajes={}
 class Concurso:
-    def __init__(self):
-        self.bandas= {}
-    def inscribir_banda(self):
-        ventana_inscribir = tk.Toplevel(ventana)
-        ventana_inscribir.title("Inscribir Banda")
-        ventana_inscribir.geometry("400x300")
-        try:
-            nombre=tk.Label(ventana_inscribir,text="Nombre: ")
-            nombre.pack(pady=3)
-            entrada_nombre=tk.Entry(ventana_inscribir)
-            entrada_nombre.pack(pady=3)
-            if nombre in self.bandas:
-                print("Nombre de la banda ya registrado")
-                return
-            institucion = tk.Label(ventana_inscribir, text="Institucion: ")
-            institucion.pack(pady=3)
-            entrada_institucion = tk.Entry(ventana_inscribir)
-            entrada_institucion.pack(pady=3)
-            categoria = tk.Label(ventana_inscribir, text="Categoria: ")
-            categoria.pack(pady=3)
-            entrada_categoria = tk.Entry(ventana_inscribir)
-            entrada_categoria.pack(pady=3)
-            self.bandas[nombre]= {
-                "nombre":nombre,
-                "institucion":institucion,
-                "categoria":categoria
-            }
-        except Exception as e:
-            print(f"Error: {e}")
-        print("Se abrió la ventana: Inscribir Banda")
+    def __init__(self,nombre,fecha):
+        self.nombre=nombre
+        self.fecha=fecha
+        self.bandas={}
 
-    def registrar_evaluacion(self):
-        print("Se abrió la ventana: Registrar Evaluación")
-        ventana_eval = tk.Toplevel(ventana)
-        ventana_eval.title("Registrar Evaluación")
-        ventana_eval.geometry("400x300")
+        def inscribir_banda(self, banda):
+            pass
 
-    def listar_bandas(self):
-        print("Se abrió la ventana: Listado de Bandas")
-        ventana_listado = tk.Toplevel(ventana)
-        ventana_listado.title("Listado de Bandas")
-        ventana_listado.geometry("400x300")
+        def registrar_evaluacion(self, nombre_banda, puntajes):
+            pass
 
-
-    def ver_ranking(self):
-        print("Se abrió la ventana: Ranking Final")
-        ventana_ranking = tk.Toplevel(ventana)
-        ventana_ranking.title("Ranking Final")
-        ventana_ranking.geometry("400x300")
-
+        def listar_bandas(self):
+            pass
+        def ranking(self):
+            pass
 class ConcursoBandasApp:
     def __init__(self):
         self.ventana = tk.Tk()
@@ -83,9 +56,22 @@ class ConcursoBandasApp:
         self.ventana.config(menu=barra)
 
     def inscribir_banda(self):
-        print("Se abrió la ventana: Inscribir Banda")
-        tk.Toplevel(self.ventana).title("Inscribir Banda")
+        ventana_inscribir = tk.Toplevel(self.ventana)
+        ventana_inscribir.title("Inscribir Banda")
 
+        etiqueta_nombre = tk.Label(ventana_inscribir, text="Nombre de la Banda:")
+        etiqueta_nombre.pack(pady=3)
+        entrada_nombre = tk.Entry(ventana_inscribir)
+        entrada_nombre.pack(pady=3)
+
+        etiqueta_institucion = tk.Label(ventana_inscribir, text="Institucion:")
+        etiqueta_institucion.pack(pady=3)
+        entrada_institucion = tk.Entry(ventana_inscribir)
+        entrada_institucion.pack(pady=3)
+        etiqueta_categoria = tk.Label(ventana_inscribir, text="Categoria (Primaria/Basico/Diversificado):")
+        etiqueta_categoria.pack(pady=3)
+        entrada_categoria = tk.Entry(ventana_inscribir)
+        entrada_categoria.pack(pady=3)
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         tk.Toplevel(self.ventana).title("Registrar Evaluación")
