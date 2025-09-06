@@ -74,6 +74,8 @@ class ConcursoBandasApp:
         etiqueta_categoria.pack(pady=3)
         entrada_categoria = tk.Entry(ventana_inscribir)
         entrada_categoria.pack(pady=3)
+        def guardar():
+            pass
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         tk.Toplevel(self.ventana).title("Registrar Evaluación")
