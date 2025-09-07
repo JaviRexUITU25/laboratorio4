@@ -56,7 +56,10 @@ class Concurso:
         pass
 
     def listar_bandas(self):
-        pass
+        if self.bandas:
+            return [banda.mostrar_info() for banda in self.bandas.values()]
+        else:
+            return ["No hay bandas inscritas"]
     def ranking(self):
         pass
 class ConcursoBandasApp:
@@ -115,13 +118,14 @@ class ConcursoBandasApp:
             print(f" Banda inscrita: {banda.mostrar_info()}")
         tk.Button(ventana_inscribir, text="Guardar", command=guardar).pack(pady=10)
     def registrar_evaluacion(self):
-        print("Se abrió la ventana: Registrar Evaluación")
-        tk.Toplevel(self.ventana).title("Registrar Evaluación")
+        ventana_eval = tk.Toplevel(self.ventana)
+        ventana_eval.title("Registrar Evaluación")
 
     def listar_bandas(self):
         ventana_listar = tk.Toplevel(self.ventana)
         ventana_listar.title("Listar Bandas")
-
+        for info in self.concurso.listar_bandas():
+            tk.Label(ventana_listar, text=info).pack(pady=3)
 
     def ver_ranking(self):
         ventana_ranking = tk.Toplevel(self.ventana)
