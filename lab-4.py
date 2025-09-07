@@ -6,30 +6,62 @@ class Participante:
     def mostrar_info(self):
         return f"{self.nombre}|{self.institucion}"
 class Banda(Participante):
+    categorias_validas= ["primaria","básico","diversificado"]
+    criterios= ["ritmo","uniformidad","coreografia","alineacion","puntualidad"]
     def __init__(self,nombre,institucion,categoria):
         super().__init__(nombre,institucion)
-        self.categoria= categoria
-        self.puntajes={}
+        self._categoria= categoria
+        self._puntajes={}
+    @property
+    def categoria(self):
+        return self.categoria
+    @categoria.setter
+    def categoria(self,categoria):
+        if categoria not in Banda.categorias_validas:
+            print("Categoria invalida")
+        else:
+            self.categoria=categoria
+    @property
+    def puntajes(self):
+        return self._puntajes
+    @puntajes.setter
+    def puntajes(self,nuevo_puntaje):
+        self._puntajes=nuevo_puntaje
+    def registrar_puntajes(self,puntajes):
+        for criterio, valor in puntajes.items():
+            if not (0 <= valor <= 10):
+                print(f"Puntaje inválido en {criterio}: {valor}")
+        self.puntajes = puntajes
+    def total(self):
+        return sum(self.puntajes.values())
+    def promedio(self):
+        return self.total()/len(Banda.criterios)
+    def mostrar_info(self):
+        if self.puntajes:
+            return super().mostrar_info()+f"| {self._categoria} | Total: {self.total}"
+        return super().mostrar_info()+f"| {self._categoria} | Sin evaluar"
+
 class Concurso:
     def __init__(self,nombre,fecha):
         self.nombre=nombre
         self.fecha=fecha
         self.bandas={}
 
-        def inscribir_banda(self, banda):
-            if banda.nombre in self.bandas:
-                print("Banda ya inscrita")
-            self.bandas[banda.nombre] = banda
+    def inscribir_banda(self, banda):
+        if banda.nombre in self.bandas:
+            print("Banda ya inscrita")
+        self.bandas[banda.nombre] = banda
 
-        def registrar_evaluacion(self, nombre_banda, puntajes):
-            pass
+    def registrar_evaluacion(self, nombre_banda, puntajes):
+        pass
 
-        def listar_bandas(self):
-            pass
-        def ranking(self):
-            pass
+    def listar_bandas(self):
+        pass
+    def ranking(self):
+        pass
 class ConcursoBandasApp:
     def __init__(self):
+        self.concurso = Concurso("Concurso 14 de Septiembre", "14/09/2025")
         self.ventana = tk.Tk()
         self.ventana.title("Concurso de Bandas - Quetzaltenango")
         self.ventana.geometry("500x300")
@@ -75,18 +107,25 @@ class ConcursoBandasApp:
         entrada_categoria = tk.Entry(ventana_inscribir)
         entrada_categoria.pack(pady=3)
         def guardar():
-            pass
+            nombre = entrada_nombre.get()
+            institucion = entrada_institucion.get()
+            categoria = entrada_categoria.get().lower()
+            banda = Banda(nombre, institucion, categoria)
+            self.concurso.inscribir_banda(banda)
+            print(f" Banda inscrita: {banda.mostrar_info()}")
+        tk.Button(ventana_inscribir, text="Guardar", command=guardar).pack(pady=10)
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         tk.Toplevel(self.ventana).title("Registrar Evaluación")
 
     def listar_bandas(self):
-        print("Se abrió la ventana: Listado de Bandas")
-        tk.Toplevel(self.ventana).title("Listado de Bandas")
+        ventana_listar = tk.Toplevel(self.ventana)
+        ventana_listar.title("Listar Bandas")
+
 
     def ver_ranking(self):
-        print("Se abrió la ventana: Ranking Final")
-        tk.Toplevel(self.ventana).title("Ranking Final")
+        ventana_ranking = tk.Toplevel(self.ventana)
+        ventana_ranking.title("Ranking Final")
 
 
 if __name__ == "__main__":
