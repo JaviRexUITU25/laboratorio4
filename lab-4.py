@@ -53,7 +53,12 @@ class Concurso:
         self.bandas[banda.nombre] = banda
 
     def registrar_evaluacion(self, nombre_banda, puntajes):
-        pass
+        if nombre_banda not in self.bandas:
+            print("Banda no encontrada")
+            return
+        banda = self.bandas[nombre_banda]
+        banda.registrar_puntajes(puntajes)
+        print(f"Evaluación registrada para {nombre_banda}: Total {banda.total()}")
 
     def listar_bandas(self):
         if self.bandas:
@@ -131,6 +136,12 @@ class ConcursoBandasApp:
         ventana_ranking = tk.Toplevel(self.ventana)
         ventana_ranking.title("Ranking Final")
 
-
+        ranking = self.concurso.ranking()
+        if not ranking:
+            tk.Label(ventana_ranking, text="No hay bandas evaluadas").pack(pady=5)
+            return
+        for i, banda in enumerate(ranking, start=1):
+            info = f"{i}. {banda.nombre} ({banda.institucion}) - Total: {banda.total()}"
+            tk.Label(ventana_ranking, text=info).pack(pady=3)
 if __name__ == "__main__":
     ConcursoBandasApp()
